@@ -1,6 +1,6 @@
-Pandas
-NumPy
-Scikit-learn
-Matplotlib
+pandas
+numpy
+scikit-learn
+matplotlib
 
 -e .
