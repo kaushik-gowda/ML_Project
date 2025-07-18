@@ -11,10 +11,10 @@
 7. Choose the best model
 
 
-- . problrm statement
+-  problrm statement
     - The projects shows how the student's performance is affected by other variables such as gender, parental level education, ethnicity, race , luch etc..
 
-- . Data collection and Packages
+-  Data collection and Packages
     - Datset consists of 8 rows and 1000 columns
     E:\PROJECTS\ML_Project\notebook\data\student_performance.csv
     - Import Pandas, Numpy, Matplotlib, Seaborn and warings library
@@ -29,12 +29,12 @@
         writing score
 
     
-- . Checking all the missing values
+-  Checking all the missing values
     - missing values, duplicates, data type, no of unique values 
     - check statistics of dataset, categories present in various forms
 
 
-- . Analyszing the data using Visualization techniques
+-  Analyszing the data using Visualization techniques
     - Comparing between gender and avearge
     - comparing between gender and test score
     - Plotting graghs for statistical data
