@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>🎓 Student Performance Predictor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Performance Predictor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -14,16 +13,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         .container {
             background-color: #ffffff;
-            padding: 40px;
+            padding: 40px 30px;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            width: 420px;
-            max-width: 90%;
+            width: 400px;
+            max-width: 95%;
         }
 
         h1 {
@@ -43,13 +42,14 @@
             font-weight: 500;
         }
 
-        input[type=\"number\"],
+        input[type="number"],
         select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 15px;
+            background-color: #f9f9f9;
         }
 
         button {
@@ -71,22 +71,23 @@
         }
 
         .result {
-            margin-top: 30px;
+            margin-top: 24px;
             background-color: #f3f9ff;
             padding: 15px;
-            border-left: 4px solid #2575fc;
+            border-left: 5px solid #2575fc;
             border-radius: 8px;
             font-size: 17px;
             color: #333;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📊 Student Performance Predictor</h1>
-        <form action="/predict" method="POST">
+        <h1>📊 Predict Student Score</h1>
+        <form method="POST">
             <div class="form-group">
-                <label>Gender:</label>
+                <label for="gender">Gender</label>
                 <select name="gender" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -94,7 +95,7 @@
             </div>
 
             <div class="form-group">
-                <label>Race/Ethnicity:</label>
+                <label for="race_ethnicity">Race / Ethnicity</label>
                 <select name="race_ethnicity" required>
                     <option value="group A">Group A</option>
                     <option value="group B">Group B</option>
@@ -105,18 +106,19 @@
             </div>
 
             <div class="form-group">
-                <label>Parental Level of Education:</label>
+                <label for="parental_level_of_education">Parental Level of Education</label>
                 <select name="parental_level_of_education" required>
-                    <option value="associate's degree">Associate's degree</option>
-                    <option value="bachelor's degree">Bachelor's degree</option>
-                    <option value="high school">High school</option>
-                    <option value="master's degree">Master's degree</option>
-                    <option value="some college">Some college</option>
+                    <option value="associate's degree">Associate's Degree</option>
+                    <option value="bachelor's degree">Bachelor's Degree</option>
+                    <option value="master's degree">Master's Degree</option>
+                    <option value="some college">Some College</option>
+                    <option value="high school">High School</option>
+                    <option value="some high school">Some High School</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Lunch:</label>
+                <label for="lunch">Lunch Type</label>
                 <select name="lunch" required>
                     <option value="standard">Standard</option>
                     <option value="free/reduced">Free/Reduced</option>
@@ -124,7 +126,7 @@
             </div>
 
             <div class="form-group">
-                <label>Test Preparation Course:</label>
+                <label for="test_preparation_course">Test Preparation Course</label>
                 <select name="test_preparation_course" required>
                     <option value="none">None</option>
                     <option value="completed">Completed</option>
@@ -132,22 +134,21 @@
             </div>
 
             <div class="form-group">
-                <label>Reading Score:</label>
+                <label for="reading_score">Reading Score</label>
                 <input type="number" name="reading_score" min="0" max="100" required>
             </div>
 
             <div class="form-group">
-                <label>Writing Score:</label>
+                <label for="writing_score">Writing Score</label>
                 <input type="number" name="writing_score" min="0" max="100" required>
             </div>
 
-            <button type="submit">🔍 Predict Math Score</button>
+            <button type="submit">🔍 Predict Score</button>
         </form>
 
-        {% if prediction_text %}
+        {% if result %}
         <div class="result">
-            <h2>📈 Predicted Math Score:</h2>
-            <p>{{ prediction_text }}</p>
+            🎯 <strong>Predicted Math Score:</strong> {{ result }}
         </div>
         {% endif %}
     </div>
