@@ -1,43 +1,42 @@
 from flask import Flask, request, render_template
 import pickle
-import numpy as np
 import pandas as pd
 
 app = Flask(__name__)
 
-# Load preprocessor and model
-preprocessor = pickle.load(open("artifacts/preprocessor.pkl", "rb"))
+# Load model and preprocessor
 model = pickle.load(open("artifacts/model.pkl", "rb"))
+preprocessor = pickle.load(open("artifacts/preprocessor.pkl", "rb"))
 
-@app.route('/')
-def home():
-    return render_template('index.html')
 
-@app.route('/predict', methods=['POST'])
+@app.route("/", methods=["GET", "POST"])
 def predict():
-    try:
-        # Get input values from form
-        input_data = {
-            'gender': request.form['gender'],
-            'race_ethnicity': request.form['race_ethnicity'],
-            'parental_level_of_education': request.form[
-                'parental_level_of_education'],
-            'lunch': request.form['lunch'],
-            'test_preparation_course': request.form['test_preparation_course'],
-            'reading_score': float(request.form['reading_score']),
-            'writing_score': float(request.form['writing_score'])
-        }
+    prediction = None
 
-        df = pd.DataFrame([input_data])
-        transformed_input = preprocessor.transform(df)
-        prediction = model.predict(transformed_input)
+    if request.method == "POST":
+        try:
+            input_data = {
+                'gender': request.form['gender'],
+                'race_ethnicity': request.form['race_ethnicity'],
+                'parental_level_of_education': request.form[
+                    'parental_level_of_education'],
+                'lunch': request.form['lunch'],
+                'test_preparation_course': request.form[
+                    'test_preparation_course'],
+                'reading_score': float(request.form['reading_score']),
+                'writing_score': float(request.form['writing_score'])
+            }
 
-        return render_template('result.html', prediction=round(prediction[0],
-                                                               2))
+            df = pd.DataFrame([input_data])
+            transformed = preprocessor.transform(df)
+            prediction = model.predict(transformed)[0]
+            prediction = round(prediction, 2)
 
-    except Exception as e:
-        return f"❌ Error: {e}"
+        except Exception as e:
+            prediction = f"❌ Error: {e}"
+
+    return render_template("index.html", prediction=prediction)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
