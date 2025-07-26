@@ -1,8 +1,7 @@
-## End to End Machine Learning Project
+## Student Performane Checker
 
 To view the Project : [https://student-performance-4l3x.onrender.com](https://student-performance-4l3x.onrender.com)
 
-## Student Performane Checker
 
 1. Understanding problem statement
 2. Data collection
